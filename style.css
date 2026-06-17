@@ -45,6 +45,7 @@ body{
   color:var(--neutral-900);
   overflow-x:hidden;
   line-height:1.6;
+  overflow-wrap:break-word;
 }
 h1,h2,h3,h4,h5{font-family:var(--font-head);font-weight:700;line-height:1.15;letter-spacing:-0.02em;}
 a{text-decoration:none;color:inherit;}
@@ -175,6 +176,41 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .sec-head p{font-size:17px;color:var(--neutral-700);}
 .on-dark .sec-head h2{color:var(--white);}
 .on-dark .sec-head p{color:rgba(255,255,255,0.7);}
+
+/* ---------- Responsive grid utilities ---------- */
+/* Big two-column splits (hero/text+visual sections). Ratio fixed at desktop, stacks below 900px. */
+.g-split,.g-split-rev,.g-split-even{display:grid;}
+.g-split{grid-template-columns:1.1fr 0.9fr;}
+.g-split-rev{grid-template-columns:0.9fr 1.1fr;}
+.g-split-even{grid-template-columns:1fr 1fr;}
+@media (max-width:900px){
+  .g-split,.g-split-rev,.g-split-even{grid-template-columns:1fr;}
+}
+
+/* Small inner content grids (stat pairs, decorative blocks) */
+.g-2{display:grid;grid-template-columns:1fr 1fr;}
+@media (max-width:600px){.g-2{grid-template-columns:1fr;}}
+
+/* Three-up card grids (differentiators, mission/vision, blog/portfolio cards) */
+.g-3{display:grid;grid-template-columns:repeat(3,1fr);}
+@media (max-width:900px){.g-3{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:600px){.g-3{grid-template-columns:1fr;}}
+
+/* Four-up card grids (values, timeline, team) */
+.g-4{display:grid;grid-template-columns:repeat(4,1fr);}
+@media (max-width:1100px){.g-4{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:600px){.g-4{grid-template-columns:1fr;}}
+
+/* Grid items default to min-width:auto, which lets long unbreakable strings
+   (emails, URLs) force a column wider than the viewport. Allow them to shrink. */
+.g-split>*,.g-split-rev>*,.g-split-even>*,.g-2>*,.g-3>*,.g-4>*{min-width:0;}
+
+@media (max-width:600px){
+  /* Inline-styled hero/page headings were fixed-px and never scaled down for phones */
+  .hero h1{font-size:38px !important;}
+  .page-hero h1{font-size:32px;}
+  .sec-head h2{font-size:28px;}
+}
 
 /* ---------- Service Cards ---------- */
 .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
